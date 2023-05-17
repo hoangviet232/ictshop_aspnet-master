@@ -1,0 +1,144 @@
+﻿@using Ictshop.Models
+@model Sanpham
+
+
+@{
+    ViewBag.Title = "xemchitiet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+
+<CENTER>
+    <div>
+        <h2>CHI TIẾT SẢN PHẨM</h2>
+        <div style="display:flex;">
+            <div style="width:400px">
+                <img src="@Url.Content("~" +@Model.Anhbia)" style="width:100%;height:100%;object-fit:cover;" />
+            </div>
+            <div style="flex:1">
+                <h3 style=" text-align: left; padding: 0 6%; font-weight:600;">@Model.Tensp</h3>
+                <table class="table-detail">
+                    <tr class="chan">
+                        <td>
+                            Hệ điều hành
+                        </td>
+                        <td>
+                            @Model.Hedieuhanh.Tenhdh
+                        </td>
+                    </tr>
+                    <tr class="le">
+                        <td>
+                            Hãng sản xuất
+                        </td>
+                        <td>
+                            @Model.Hangsanxuat.Tenhang
+                        </td>
+                    </tr>
+                    <tr class="chan">
+                        <td>
+                            Thẻ sim
+                        </td>
+                        <td>
+                            @Model.Thesim
+                        </td>
+                    </tr>
+                    <tr class="le">
+                        <td>
+                            Bộ nhớ trong
+                        </td>
+                        <td>
+                            @Model.Bonhotrong
+                        </td>
+                    </tr>
+                    <tr class="chan">
+                        <td>
+                            RAM
+                        </td>
+                        <td>
+                            @Model.Ram
+                        </td>
+                    </tr>
+                    <tr class="le">
+                        <td>
+                            Mô tả
+                        </td>
+                        <td>
+                            @Model.Mota
+                        </td>
+                    </tr>
+                </table>
+
+                <h3 style="color:red;font-weight:500;">@String.Format("{0:0,0}", @Model.Giatien)<span style="color:black">VND</span></h3>
+
+
+            </div>
+        </div>
+        @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMasp = Model.Masp, @strURL = Request.Url.ToString() }))
+        {
+            <input type="submit" value="Mua hàng" id="bgnGioHang" class="button-28" role="button" />
+
+        }
+    </div>
+</CENTER>
+
+<style>
+    .table-detail {
+        padding: 10px 5px;
+        font-size: 15px;
+        width: 90%;
+        .chan td, .le td
+
+    {
+        padding: 10px 5px;
+        min-width: 150px;
+    }
+
+    .chan {
+        background: #00000014;
+    }
+
+    }
+
+    .button-28 {
+        appearance: none;
+        background-color: transparent;
+        border: 2px solid #0276FF;
+        border-radius: 7px;
+        box-sizing: border-box;
+        color: #3B3B3B;
+        cursor: pointer;
+        display: inline-block;
+        font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        font-size: 16px;
+        font-weight: 600;
+        line-height: normal;
+        margin: 0;
+        min-width: 0;
+        outline: none;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        width: 100%;
+        will-change: transform;
+    }
+
+        .button-28:disabled {
+            pointer-events: none;
+        }
+
+        .button-28:hover {
+            color: #fff;
+            background-color: #0276FF;
+            box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+            transform: translateY(-2px);
+        }
+
+        .button-28:active {
+            box-shadow: none;
+            transform: translateY(0);
+        }
+</style>

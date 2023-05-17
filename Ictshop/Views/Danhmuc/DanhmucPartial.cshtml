@@ -1,0 +1,36 @@
+﻿@using Ictshop.Models;
+@model List<Hangsanxuat>
+
+<style>
+    .index{
+        font-size:16px;
+        padding:5px;
+        border:1px dashed black;
+        & li{
+              list-style-type:none;
+              width:auto;
+              text-align:center;
+              & a{
+                    text-decoration: none
+
+                 }
+            }
+    }
+</style>
+
+<br />
+
+<div class="bg-success" style="padding:10px 5px">
+
+    <h3> DANH MỤC  </h3>
+
+    <div  style="display:flex; gap:10px;width:100%; padding: 0 10px">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-1 index">
+                <li class="success">@Html.ActionLink(item.Tenhang, "Manufacturer", "DanhMuc", new { mahangsx = item.Mahang, tenhangsx = item.Tenhang }, null)</li>
+            </div>
+        }
+    </div>
+</div>

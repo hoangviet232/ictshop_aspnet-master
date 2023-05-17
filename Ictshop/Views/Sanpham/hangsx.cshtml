@@ -1,0 +1,10 @@
+﻿@foreach (var item in Model)
+{
+    <div class="row">
+        <div ><h3 style="padding-left: 20px; background: #c5c5c585; padding: 10px 15px; border-radius: 8px" id="@item.Mahang"> @item.Tenhang</h3></div>
+            @Html.Action("sanpham", "Sanpham", new { Mahang = @item.Mahang })
+    </div>
+
+}
+
+

@@ -1,0 +1,127 @@
+﻿@model IEnumerable<Ictshop.Models.Donhang>
+
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<h2>Danh sách đơn hàng</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Họ tên
+        </th>
+        <th>
+            Ngày đặt
+        </th>
+        <th>
+            Tình trạng đơn hàng
+        </th>
+        <th>
+            Thanh toán
+        </th>
+        <th>
+            Địa chỉ nhận hàng
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Nguoidung.Hoten)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Ngaydat)
+    </td>
+    <td>
+        @{ if (@item.Tinhtrang == 0)
+            {
+                <h5 style="color:red">Đang chờ xác nhận. </h5> 
+            }
+                else if (@item.Tinhtrang == 1)
+                {
+                    <h5 style="color:green">Đã xác nhận </h5> 
+                }
+                else
+                {
+                 <h5 style="color:orangered">Đang chờ xác nhận </h5> 
+                } 
+         }
+    </td>
+    <td>
+        @{ if (@item.Thanhtoan == 1)
+            {
+                <div style="color:red">Thanh toán tiền mặt</div> 
+                }
+            else if (@item.Thanhtoan == 2)
+            {
+                <div style="color:brown">Thanh toán chuyển khoản</div> }
+            }
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Diachinhanhang)
+    </td>
+    <td>
+        <button class="button-28" role="button">
+            @Html.ActionLink("Chi tiết", "Details", new { id = item.Madon }, new { @style = "color:white;" })
+        </button>
+    </td>
+</tr>}
+
+</table>
+<style>
+    .table{
+        & tr td{
+                   vertical-align:middle !important;
+               }
+    }
+    .button-28 {
+        appearance: none;
+        background-color: transparent;
+        border: 1px solid #0276FF;
+        border-radius: 7px;
+        box-sizing: border-box;
+        color: #3B3B3B;
+        cursor: pointer;
+        display: inline-block;
+        font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        font-size: 16px;
+        font-weight: 600;
+        line-height: normal;
+        margin: 0;
+        min-width: 0;
+        outline: none;
+        padding: 5px 8px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        width: 100%;
+        will-change: transform;
+        & a{
+               color:inherit !important;
+           }
+    }
+
+    .button-28:disabled {
+        pointer-events: none;
+    }
+
+        .button-28:hover {
+            color: #fff;
+            background-color: #0276FF;
+            box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+            transform: translateY(-2px);
+            & a{
+                   color:inherit !important;
+               }
+        }
+
+    .button-28:active {
+        box-shadow: none;
+        transform: translateY(0);
+    }
+</style>

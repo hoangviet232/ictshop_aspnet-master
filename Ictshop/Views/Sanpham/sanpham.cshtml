@@ -1,0 +1,42 @@
+﻿<style>
+    .btn-add-to-cart {
+        padding: 7px 15px;
+        border-radius: 5px;
+        border-width: 1px;
+        border-color: dodgerblue;
+        color: dodgerblue;
+        font-weight: 600;
+        background:white;
+    }
+
+</style>
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        <div class="col-md-3 col-sm-6">
+            <a href="@Url.Action("xemchitiet", new {@Masp=item.Masp })">
+                <img src=@Url.Content("~" +item.Anhbia.ToString()) class="img-responsive" alt="" width="400" height="400" />
+            </a>
+            <center>
+                <h3>@item.Tensp</h3>
+                <h3 style="color:red">Giá: @String.Format("{0:0,0}", @item.Giatien) VND</h3>
+                <br />
+                @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMasp = item.Masp, @strURL = Request.Url.ToString() }))
+                {
+                    <input type="submit" value="Thêm vào giỏ hàng" id="bgnGioHang" class="btn-add-to-cart"/>
+                }
+                @*<a href="@Url.Action("xemchitiet", new {@Masp=item.Masp })">Xem chi tiết</a>*@
+            </center>
+
+        </div>
+    }
+}
+else
+{
+    <center style="padding:60px 40px">
+
+    <div><h3>Không có sản phẩm nào!</h3></div>
+    </center>
+}
+

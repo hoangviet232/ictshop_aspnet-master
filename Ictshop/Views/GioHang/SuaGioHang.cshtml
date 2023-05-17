@@ -1,0 +1,129 @@
+﻿@using Ictshop.Models;
+@model List<GioHang>
+
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<center><h2 class="text-info"> GIỎ HÀNG</h2></center>
+
+<table class="table-bordered font-italic divGioHang" style="margin:0; width:100%">
+    <tr>
+        <th> Mã SP</th>
+
+        <th> Tên SP</th>
+
+        <th> Ảnh bìa</th>
+
+        <th> Đơn giá</th>
+
+        <th> Số lượng</th>
+
+        <th> Thành tiền</th>
+    </tr>
+
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td> @item.iMasp</td>
+
+            <td> @item.sTensp</td>
+
+            <td> <img src="@Url.Content("~" +item.sAnhBia)" width="50" height="50" /></td>
+
+            <td>  @String.Format("{0:0,0}", item.dDonGia) VNĐ</td>
+
+            @*Chỉnh sửa giỏ hàng gọi về action CapNhatGioHang*@
+            @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { @iMaSP = item.iMasp }))
+            {
+
+                <td>@Html.TextBox("txtSoLuong", item.iSoLuong) </td>
+
+                <td>@String.Format("{0:0,0}", item.ThanhTien) VNĐ</td>
+                <td style="display:flex; gap:8px">
+                    <input type="submit" value="Cập nhật" class="button-24 btn-update" role="button"/>
+                    @*Xóa giỏ hàng gọi về Action XoaGioHang*@
+                    <button class="button-24" role="button">@Html.ActionLink("Xóa", "XoaGioHang", new { @iMaSP = item.iMasp })</button>
+                </td>
+            }
+
+        </tr>
+    }
+</table>
+
+@*Css giỏ hàng*@
+<style type="text/css">
+    .divGioHang {
+        border: 2px solid #EEEEEE;
+        margin-left: 10%;
+        font-size: large
+    }
+
+        .divGioHang td {
+            padding: 10px;
+            border: 2px solid #EEEEEE;
+            text-align: center
+        }
+
+        .divGioHang th {
+            text-align: center
+        }
+    /* CSS */
+    .button-24 {
+        background: #FF4742;
+        border: 1px solid #FF4742;
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 12px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+        flex:1;
+        & a
+    {
+        text-decoration: none;
+        color: inherit;
+    }
+    }
+
+    .button-24:hover,
+    .button-24:active {
+        background-color: initial;
+        background-position: 0 0;
+        color: #FF4742;
+        & a
+    {
+        color: inherit;
+    }
+    }
+
+    .button-24:active {
+        opacity: .5;
+    }
+    .btn-update {
+        background: #0276FF;
+        border: 1px solid #0276FF;
+    }
+    .btn-update:hover,
+    .btn-update:active {
+        background-color: initial;
+        background-position: 0 0;
+        color: #0276FF;
+    }
+</style>
